@@ -33,7 +33,12 @@ namespace arena_trail
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = Setting.ReslutionWidth,
+                PreferredBackBufferHeight = Setting.ReslutionHeight
+            };
+            graphics.ApplyChanges();
             Content.RootDirectory = "Content";
         }
 
@@ -62,8 +67,6 @@ namespace arena_trail
             backgroundTexture = Content.Load<Texture2D>("Images/background1");
             boxTexture = Content.Load<Texture2D>("Images/box");
             robotTexture = Content.Load<Texture2D>("Images/robot");
-
-            // gridMatrix = GenerateGrid(new Rectangle(0, 0, screenHeight, screenWidth), Setting.GridSize, Setting.GridSize, Color.SandyBrown);
 
             // TODO: use this.Content to load your game content here
         }
@@ -129,9 +132,12 @@ namespace arena_trail
         private void DrawStaticObstacles()
         {
             // Dummy Two-dimensional array.
-            int[,] array2D = new int[,] {{1, 1}, {2, 1}, {3, 1}, {4, 1}, {2,1}, { 2, 2 }, { 2, 3 } };
+            int[,] array2D = {
+                {0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 7}, {0, 8}, {0, 9},
+                {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}, {6, 0}, {7, 0}, {8, 0}, {9, 0}
+            };
 
-            for (var i = 0; i < 7; i++)
+            for (var i = 0; i < array2D.GetLength(0); i++)
             {
                 DrawStaticObstacle(array2D[i, 0], array2D[i, 1]);
             }
@@ -139,83 +145,10 @@ namespace arena_trail
 
         private void DrawStaticObstacle(int x, int y)
         {
-            Rectangle screenRectangle = new Rectangle(x * Setting.TileSize, y * Setting.TileSize, Setting.TileSize,
+            Rectangle screenRectangle = new Rectangle(0 + Setting.TileSize * x, 0 + Setting.TileSize * y,
+                Setting.TileSize,
                 Setting.TileSize);
             spriteBatch.Draw(boxTexture, screenRectangle, Color.White);
         }
-
-        //        private void DrawStaticObstacles()
-        //        {
-        //            // Rectangle screenRectangle = new Rectangle(10, 40, Setting.TileSize, Setting.TileSize);
-        //            //  spriteBatch.Draw(boxTexture, screenRectangle, Color.White);
-        //
-        //            for (var i = 0; i < 50; i++)
-        //            { 
-        //            
-        //            }
-        //
-        ////             private void DrawStaticObstacle()
-        //        {
-        //            Rectangle screenRectangle = new Rectangle(10, 40, Setting.TileSize, Setting.TileSize);
-        //              spriteBatch.Draw(boxTexture, screenRectangle, Color.White);
-        //
-        //
-        //                 //int x, int y 
-        //            
-        //            /*
-        //            private void DrawGridLines()
-        //            {
-        //                Rectangle screenRectangle = new Rectangle(0, 0, Setting.ReslutionWidth, Setting.ReslutionHeight);
-        //                spriteBatch.Draw(gridMatrix, screenRectangle, Color.White);
-        //            }
-        //
-        //            private Texture2D GenerateGrid(Rectangle destRect, int cols, int rows, Color gridColor)
-        //            {
-        //                RenderTarget2D grid = new RenderTarget2D(GraphicsDevice, destRect.Width,
-        //                    destRect.Height);
-        //                try
-        //                {
-        //                    float gridCellWidth = destRect.Width / (float)cols;
-        //                    float gridCellHight = destRect.Height / (float)rows;
-        //                    int w = (int)(cols * gridCellWidth);
-        //                    int h = (int)(rows * gridCellHight);
-        //
-        //                    float uselessWidth = destRect.Width - w;
-        //                    float uselessHight = destRect.Height - h;
-        //
-        //                    Rectangle bounds = new Rectangle((int)(uselessWidth / 2) + destRect.X, (int)(uselessHight / 2) + destRect.Y, w, h);
-        //
-        //                    GraphicsDevice.SetRenderTarget(grid);
-        //                    GraphicsDevice.Clear(Color.Transparent);
-        //
-        //                    primitiveBatch.Begin(PrimitiveType.LineList);
-        //
-        //                    float x = bounds.X;
-        //                    float y = bounds.Y;
-        //
-        //                    for (int col = 0; col < cols + 1; col++)
-        //                    {
-        //                        primitiveBatch.AddVertex(new Vector2(x + (col * gridCellWidth), bounds.Top), gridColor);
-        //                        primitiveBatch.AddVertex(new Vector2(x + (col * gridCellWidth), bounds.Bottom), gridColor);
-        //                    }
-        //
-        //                    for (int row = 0; row < rows + 1; row++)
-        //                    {
-        //                        primitiveBatch.AddVertex(new Vector2(bounds.Left, y + (row * gridCellHight)), gridColor);
-        //                        primitiveBatch.AddVertex(new Vector2(bounds.Right, y + (row * gridCellHight)), gridColor);
-        //                    }
-        //                    primitiveBatch.End();
-        //
-        //                    GraphicsDevice.SetRenderTarget(null);
-        //
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    Console.WriteLine("GenerateGrid() Exception : " + ex.Message);
-        //                }
-        //                return grid;
-        //            }*/
-        //        }
-        //    }
     }
 }

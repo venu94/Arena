@@ -12,7 +12,7 @@ namespace arena_trail
     {
         //Resolution
         public static int ReslutionWidth = 800;
-        public static int ReslutionHeight = 450;
+        public static int ReslutionHeight = 600;
 
         public static int GridSize = 10;
         public static int TileSize = ReslutionHeight / GridSize;
@@ -28,7 +28,6 @@ namespace arena_trail
             Setting.ReslutionWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             Setting.ReslutionHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             Setting.Refresh();
-
         }
     }
 }
